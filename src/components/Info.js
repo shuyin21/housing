@@ -6,7 +6,7 @@ import Button from '../components/Button';
 
 const Info = () => {
 
-    const [sellers, setSellers] = useState(false);
+    const [sellers, setSellers] = useState(true);
     const [buyers, setBuyers] = useState(false);
     const [landlords, setLandlords] = useState(false);
     const [tenants, setTenants] = useState(false);
