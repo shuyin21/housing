@@ -4,7 +4,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import SelectButton from './SelectButton';
 import Button from '../components/Button';
 import Marketing from './Marketing';
-import { MData1 } from './Data';
+import { MData1 } from './Data.js';
 
 const Info = () => {
 
