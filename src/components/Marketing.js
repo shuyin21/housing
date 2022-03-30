@@ -46,9 +46,11 @@ text-align:center;
 justify-content:center;
 align-items:center;
 padding:0 10px ;
+transition:1.2s ease-in-out  ;
 
 p{
     color:#A0A1A6;
+    transition:2s ease-in-out
 }
 `;
 
