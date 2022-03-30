@@ -4,7 +4,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import SelectButton from './SelectButton';
 import Button from '../components/Button';
 import Marketing from './Marketing';
-import { MData1 } from './Data.js';
+import { MData1, MData2 } from './Data.js';
 
 const Info = () => {
 
@@ -19,10 +19,12 @@ const Info = () => {
     const sellerHandler = () => {
         clearStates();
         setSellers(true);
+        setData(MData1);
     }
     const buyerHandler = () => {
         clearStates();
         setBuyers(true);
+        setData(MData2);
     }
     const landlordHandler = () => {
         clearStates();
