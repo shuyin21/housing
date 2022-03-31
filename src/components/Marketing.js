@@ -7,9 +7,6 @@ const Marketing = (props) => {
 
         <Box><Icon src={props.img} /><Header>{props.header}</Header><p>{props.paragraph}</p></Box>
 
-
-
-
     )
 }
 
