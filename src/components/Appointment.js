@@ -12,6 +12,7 @@ const Appointment = () => {
                     <AppointmentIcon />
                     <h2>Book Appointment</h2>
                 </Header>
+                <Box></Box>
             </Container>
         </AppointmentWrapper>
     )
@@ -55,5 +56,9 @@ h2{
 const AppointmentIcon = styled(FcOvertime)`
 width:40px;
 height:40px;
+
+`;
+
+const Box = styled.div`
 
 `;
