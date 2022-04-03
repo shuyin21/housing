@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FcOvertime } from 'react-icons/fc';
+import ProgressSteps from './Progress';
 
 const Appointment = () => {
     return (
@@ -12,7 +13,7 @@ const Appointment = () => {
                     <AppointmentIcon />
                     <h2>Book Appointment</h2>
                 </Header>
-                <Box></Box>
+                <ProgressSteps />
             </Container>
         </AppointmentWrapper>
     )
