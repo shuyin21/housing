@@ -1,73 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const ProgressSteps = () => {
 
 
-    const circles = document.querySelectorAll('.circle')
 
-    const [currentActive, setCurrentActive] = useState(1);
-    console.log(circles);
+
+    const [currentActive, setCurrentActive] = useState(0);
+    const [disable, setDisable] = useState(true);
+    const [nextDisable, setNextDisable] = useState(false);
+
+    const [circle2, setCircle2] = useState(false);
+    const [circle3, setCircle3] = useState(false);
 
     const nextHandler = () => {
-        setCurrentActive(currentActive++);
+        setCurrentActive(currentActive + 1);
 
-        console.log('circles');
+        setDisable(false);
 
-        // if (currentActive > circles.length) {
-        //     currentActive = circles.length
-        // }
 
-        // update()
     }
 
     const prevHandler = () => {
-        setCurrentActive(currentActive--)
+        setCurrentActive(currentActive - 1);
 
-        if (currentActive < 1) {
-            currentActive = 1
+
+    }
+
+    useEffect(() => {
+        if (currentActive <= 0) {
+            setDisable(true);
+            setCurrentActive(0);
+            setCircle2(false);
         }
+        if (currentActive === 1) {
+            setCircle2(true);
+            setCircle3(false);
+        }
+        if (currentActive >= 2) {
+            setCurrentActive(2);
+            setNextDisable(true);
+            setCircle3(true);
 
-        update()
-    }
+        }
+        else if (currentActive < 2) {
+            setNextDisable(false);
+        }
+        console.log(currentActive);
+    }, [currentActive])
 
-    function update() {
-        circles.forEach((circle, idx) => {
-            if (idx < currentActive) {
-                circle.classList.add('active')
-            } else {
-                circle.classList.remove('active')
-            }
-        })
-
-        const actives = document.querySelectorAll('.active')
-
-        // progress.style.width = (actives.length - 1) / (circles.length - 1) * 100 + '%'
-
-        // if (currentActive === 1) {
-        //     prev.disabled = true
-        // } else if (currentActive === circles.length) {
-        //     next.disabled = true
-        // } else {
-        //     prev.disabled = false
-        //     next.disabled = false
-        // }
-    }
 
 
     return (
         <Wrapper>
             <Container>
-                <ProgressContainer>
+                <ProgressContainer >
                     <Progress id="progress"></Progress>
-                    <Circle className="active">1</Circle>
-                    <Circle >2</Circle>
-                    <Circle >3</Circle>
-                    <Circle >4</Circle>
+                    <Circle activate={true}>1</Circle>
+                    <Circle activate={circle2} >2</Circle>
+                    <Circle activate={circle3}>3</Circle>
+
                 </ProgressContainer>
 
-                <Btn onClick={prevHandler} id="prev" disabled>Prev</Btn>
-                <Btn onclick={nextHandler} id="next">Next</Btn>
+                <Btn onClick={prevHandler} id="prev" disabled={disable} >Prev</Btn>
+                <Btn onClick={nextHandler} id="next" disabled={nextDisable}>Next</Btn>
+
             </Container>
         </Wrapper>
     )
@@ -125,12 +122,13 @@ const Progress = styled.div`
     transform: translateY(-50%);
     height: 4px;
     width: 0%;
-    z-index: -1;
+    z-index: 2;
     transition: 0.4s ease;
   `
 
 
-const Circle = styled.div`background-color: #fff;
+const Circle = styled.div`
+background-color: #fff;
     color: #999;
     border-radius: 50%;
     height: 30px;
@@ -138,12 +136,11 @@ const Circle = styled.div`background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid  #e0e0e0;
+    /* border: 3px solid #e0e0e0; */
     transition: 0.4s ease;
+    border:${({ activate }) => (activate === true ? '3px solid #3498db' : '3px solid #e0e0e0')};
 
-    .active {
-    border-color: #3498db;
-  }
+    
 
   `
 
