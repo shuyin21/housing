@@ -12,10 +12,15 @@ const ProgressSteps = () => {
 
     const [circle2, setCircle2] = useState(false);
     const [circle3, setCircle3] = useState(false);
+    const [percent, setPercent] = useState(0);
+    const [myStyle, setMyStyle] = useState({
+        width: { percent }
+    })
 
     const nextHandler = () => {
         setCurrentActive(currentActive + 1);
-
+        setPercent(percent + 50)
+        console.log(percent);
         setDisable(false);
 
 
@@ -23,7 +28,7 @@ const ProgressSteps = () => {
 
     const prevHandler = () => {
         setCurrentActive(currentActive - 1);
-
+        setPercent(percent - 50)
 
     }
 
@@ -55,7 +60,7 @@ const ProgressSteps = () => {
         <Wrapper>
             <Container>
                 <ProgressContainer >
-                    <Progress id="progress"></Progress>
+                    <Progress id="progress" style={{ width: percent + '%' }}></Progress>
                     <Circle activate={true}>1</Circle>
                     <Circle activate={circle2} >2</Circle>
                     <Circle activate={circle3}>3</Circle>
@@ -121,8 +126,8 @@ const Progress = styled.div`
     left: 0;
     transform: translateY(-50%);
     height: 4px;
-    width: 0%;
-    z-index: 2;
+   
+    z-index: 1;
     transition: 0.4s ease;
   `
 
@@ -139,6 +144,7 @@ background-color: #fff;
     /* border: 3px solid #e0e0e0; */
     transition: 0.4s ease;
     border:${({ activate }) => (activate === true ? '3px solid #3498db' : '3px solid #e0e0e0')};
+    z-index: 2;
 
     
 
