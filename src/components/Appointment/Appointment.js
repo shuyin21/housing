@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FcOvertime } from 'react-icons/fc';
 import ProgressSteps from './Progress';
+import Calendar from './Calendar';
 
 const Appointment = () => {
     return (
@@ -14,6 +15,7 @@ const Appointment = () => {
                     <h2>Book Appointment</h2>
                 </Header>
                 <ProgressSteps />
+
             </Container>
         </AppointmentWrapper>
     )
@@ -29,6 +31,7 @@ display:flex;
 flex-direction: column ;
 align-items:center;
 justify-content:center;
+background-color: #f6f7fb;
 `;
 
 

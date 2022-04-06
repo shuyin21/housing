@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Calendar from './Calendar';
 
 const ProgressSteps = () => {
 
@@ -19,7 +20,7 @@ const ProgressSteps = () => {
 
     const nextHandler = () => {
         setCurrentActive(currentActive + 1);
-        setPercent(percent + 50)
+        setPercent(percent + 40)
         console.log(percent);
         setDisable(false);
 
@@ -28,7 +29,7 @@ const ProgressSteps = () => {
 
     const prevHandler = () => {
         setCurrentActive(currentActive - 1);
-        setPercent(percent - 50)
+        setPercent(percent - 40)
 
     }
 
@@ -61,12 +62,12 @@ const ProgressSteps = () => {
             <Container>
                 <ProgressContainer >
                     <Progress id="progress" style={{ width: percent + '%' }}></Progress>
-                    <Circle activate={true}>1</Circle>
-                    <Circle activate={circle2} >2</Circle>
-                    <Circle activate={circle3}>3</Circle>
+                    <CircleWrapper><Circle activate={true}>1</Circle>APPOINTMENT AVAILABILITY</CircleWrapper>
+                    <CircleWrapper><Circle activate={circle2} >2</Circle>CONTACT DETAILS</CircleWrapper>
+                    <CircleWrapper> <Circle activate={circle3}>3</Circle>ADDITIONAL INFO</CircleWrapper>
 
                 </ProgressContainer>
-
+                <Calendar />
                 <Btn onClick={prevHandler} id="prev" disabled={disable} >Prev</Btn>
                 <Btn onClick={nextHandler} id="next" disabled={nextDisable}>Next</Btn>
 
@@ -85,12 +86,10 @@ text-align: center;
 `;
 
 const Wrapper = styled.div`
-background-color: #f6f7fb;
   font-family: 'Muli', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   overflow: hidden;
   margin: 0;
 
@@ -112,7 +111,7 @@ const ProgressContainer = styled.div`
     left: 0;
     transform: translateY(-50%);
     height: 4px;
-    width: 100%;
+    width: 80%;
     z-index: -1;
   }
   `;
@@ -122,15 +121,25 @@ const ProgressContainer = styled.div`
 const Progress = styled.div`
     background-color: #3498db;
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    top: 25%;
+    left: 10%;
+    transform: translateY(-30%);
     height: 4px;
    
     z-index: 1;
     transition: 0.4s ease;
   `
+const CircleWrapper = styled.div`
+width:100px;
+height:80px;
+text-align: center;
+display: flex ;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+font-size:12px ;
 
+`;
 
 const Circle = styled.div`
 background-color: #fff;

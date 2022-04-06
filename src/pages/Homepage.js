@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { sidebarDetails } from '../features/sidebarReducer';
 
 import Info from '../components/Info';
-import Appointment from '../components/Appointment';
+import Appointment from '../components/Appointment/Appointment';
 import Banner from '../components/Banner';
 
 const Homepage = () => {
