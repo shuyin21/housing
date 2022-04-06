@@ -68,8 +68,10 @@ const ProgressSteps = () => {
 
                 </ProgressContainer>
                 <Calendar />
-                <Btn onClick={prevHandler} id="prev" disabled={disable} >Prev</Btn>
-                <Btn onClick={nextHandler} id="next" disabled={nextDisable}>Next</Btn>
+                <BtnWrapper>
+                    <Btn onClick={prevHandler} id="prev" disabled={disable} >Prev</Btn>
+                    <Btn onClick={nextHandler} id="next" disabled={nextDisable}>Next</Btn>
+                </BtnWrapper>
 
             </Container>
         </Wrapper>
@@ -82,6 +84,12 @@ export default ProgressSteps
 
 const Container = styled.div`
 text-align: center;
+width:500px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
 
 `;
 
@@ -160,7 +168,12 @@ background-color: #fff;
   `
 
 
+const BtnWrapper = styled.div`
+display:flex ;
+align-items: center;
+justify-content: center;
 
+`;
 
 const Btn = styled.button`
    background-color:#3498db;

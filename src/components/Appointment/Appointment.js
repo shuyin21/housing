@@ -26,7 +26,7 @@ export default Appointment;
 
 const AppointmentWrapper = styled.div`
 width:100%;
-height:600px;
+height:650px;
 display:flex;
 flex-direction: column ;
 align-items:center;
