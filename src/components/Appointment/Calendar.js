@@ -3,19 +3,38 @@ import styled from 'styled-components';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
 const Calendar = () => {
+    const [nWeek, setNWeek] = useState();
+
 
     function getMondayOfCurrentWeek() {
         const today = new Date();
         const first = today.getDate() - today.getDay() + 1;
 
+        console.log(today);
+        console.log(first);
         const monday = new Date(today.setDate(first));
         return monday;
     }
 
-    //   useEffect(() => {
-    //       getMondayOfCurrentWeek();
-    //   })
+    useEffect(() => {
+        // var today = new Date();
+        // setNWeek(today);
+    })
     console.log(getMondayOfCurrentWeek().toLocaleString('en-UK'));
+
+    const nextweek = () => {
+        let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        var today = new Date();
+        var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        console.log(nextweek);
+        let nextweekDay = nextweek.getDate();
+        let nameDay = days[nextweekDay];
+        setNWeek(nextweekDay);
+    }
+    const anotherWeek = () => {
+
+    }
+
 
     return (
         <CalendarWrapper>
@@ -24,6 +43,8 @@ const Calendar = () => {
                 <h3>WEEK COMMENCING</h3>
                 <Circle><GrFormNext /></Circle>
             </WeekSelector>
+            <button onClick={nextweek}>next week</button>
+            <h1>{nWeek}</h1>
         </CalendarWrapper>
     )
 }
