@@ -5,6 +5,7 @@ import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 const Calendar = () => {
     const [nWeek, setNWeek] = useState();
     const [sevenDays, setSevenDays] = useState(0);
+    const [enabled, setEnabled] = useState(true);
 
 
     function getMondayOfCurrentWeek(number) {
@@ -23,9 +24,12 @@ const Calendar = () => {
         console.log(d.getDay());
         console.log(NoTimeDate);
     }
+    const thisMonday = (d) => {
+        getMondayOfCurrentWeek(d).toLocaleString('en-UK').slice(0, 10);
+    }
     useEffect(() => {
 
-
+        console.log(getMondayOfCurrentWeek(0).toLocaleString('en-UK').slice(0, 10));
         setNWeek(getMondayOfCurrentWeek(sevenDays).toLocaleString('en-UK').slice(0, 10));
     }, [sevenDays])
     console.log(getMondayOfCurrentWeek().toLocaleString('en-UK').slice(0, 10));
@@ -48,7 +52,7 @@ const Calendar = () => {
     return (
         <CalendarWrapper>
             <WeekSelector>
-                <Circle disabled><GrFormPrevious /></Circle>
+                <Circle disabled={enabled}><GrFormPrevious /></Circle>
                 <h3>WEEK COMMENCING {nWeek}</h3>
                 <Circle onClick={anotherWeek}><GrFormNext /></Circle>
             </WeekSelector>
