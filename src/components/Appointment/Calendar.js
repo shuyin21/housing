@@ -27,7 +27,7 @@ const Calendar = () => {
 
 
         setNWeek(getMondayOfCurrentWeek(sevenDays).toLocaleString('en-UK').slice(0, 10));
-    })
+    }, [sevenDays])
     console.log(getMondayOfCurrentWeek().toLocaleString('en-UK').slice(0, 10));
 
     const nextweek = () => {
@@ -41,7 +41,7 @@ const Calendar = () => {
         console.log(nextweekDay);
     }
     const anotherWeek = () => {
-
+        setSevenDays(sevenDays + 7);
     }
 
 
@@ -50,7 +50,7 @@ const Calendar = () => {
             <WeekSelector>
                 <Circle disabled><GrFormPrevious /></Circle>
                 <h3>WEEK COMMENCING {nWeek}</h3>
-                <Circle><GrFormNext /></Circle>
+                <Circle onClick={anotherWeek}><GrFormNext /></Circle>
             </WeekSelector>
             <button onClick={nextweek}>next week</button>
             <h1>{nWeek}</h1>
