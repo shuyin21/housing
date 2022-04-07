@@ -4,23 +4,31 @@ import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
 const Calendar = () => {
     const [nWeek, setNWeek] = useState();
+    const [sevenDays, setSevenDays] = useState(0);
 
 
-    function getMondayOfCurrentWeek() {
+    function getMondayOfCurrentWeek(number) {
         const today = new Date();
-        const first = today.getDate() - today.getDay() + 1;
+        const first = today.getDate() + number - today.getDay() + 1;
 
         console.log(today);
         console.log(first);
         const monday = new Date(today.setDate(first));
         return monday;
     }
-
+    const DateFunc = () => {
+        var d = new Date();
+        var NoTimeDate = d.getDate() + ' ' + (d.getMonth() + 1) + ' ' + d.getFullYear();
+        setNWeek(NoTimeDate);
+        console.log(d.getDay());
+        console.log(NoTimeDate);
+    }
     useEffect(() => {
-        // var today = new Date();
-        // setNWeek(today);
+
+
+        setNWeek(getMondayOfCurrentWeek(sevenDays).toLocaleString('en-UK').slice(0, 10));
     })
-    console.log(getMondayOfCurrentWeek().toLocaleString('en-UK'));
+    console.log(getMondayOfCurrentWeek().toLocaleString('en-UK').slice(0, 10));
 
     const nextweek = () => {
         let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -29,7 +37,8 @@ const Calendar = () => {
         console.log(nextweek);
         let nextweekDay = nextweek.getDate();
         let nameDay = days[nextweekDay];
-        setNWeek(nextweekDay);
+        // setNWeek(nextweekDay);
+        console.log(nextweekDay);
     }
     const anotherWeek = () => {
 
@@ -40,7 +49,7 @@ const Calendar = () => {
         <CalendarWrapper>
             <WeekSelector>
                 <Circle disabled><GrFormPrevious /></Circle>
-                <h3>WEEK COMMENCING</h3>
+                <h3>WEEK COMMENCING {nWeek}</h3>
                 <Circle><GrFormNext /></Circle>
             </WeekSelector>
             <button onClick={nextweek}>next week</button>
