@@ -68,6 +68,8 @@ const ProgressSteps = () => {
 
                 </ProgressContainer>
                 <Calendar />
+
+
                 <BtnWrapper>
                     <Btn onClick={prevHandler} id="prev" disabled={disable} >Prev</Btn>
                     <Btn onClick={nextHandler} id="next" disabled={nextDisable}>Next</Btn>
