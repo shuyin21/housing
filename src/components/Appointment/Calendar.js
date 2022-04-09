@@ -17,47 +17,54 @@ const Calendar = () => {
         const monday = new Date(today.setDate(first));
         return monday;
     }
-    const DateFunc = () => {
-        var d = new Date();
-        var NoTimeDate = d.getDate() + ' ' + (d.getMonth() + 1) + ' ' + d.getFullYear();
-        setNWeek(NoTimeDate);
-        console.log(d.getDay());
-        console.log(NoTimeDate);
-    }
-    const thisMonday = (d) => {
-        getMondayOfCurrentWeek(d).toLocaleString('en-UK').slice(0, 10);
-    }
+    // const DateFunc = () => {
+    //     var d = new Date();
+    //     var NoTimeDate = d.getDate() + ' ' + (d.getMonth() + 1) + ' ' + d.getFullYear();
+    //     setNWeek(NoTimeDate);
+    //     console.log(d.getDay());
+    //     console.log(NoTimeDate);
+    // }
+    // const thisMonday = (d) => {
+    //     getMondayOfCurrentWeek(d).toLocaleString('en-UK').slice(0, 10);
+    // }
     useEffect(() => {
 
         console.log(getMondayOfCurrentWeek(0).toLocaleString('en-UK').slice(0, 10));
         setNWeek(getMondayOfCurrentWeek(sevenDays).toLocaleString('en-UK').slice(0, 10));
+        if (sevenDays === 0) {
+            setEnabled(true);
+        }
     }, [sevenDays])
-    console.log(getMondayOfCurrentWeek().toLocaleString('en-UK').slice(0, 10));
 
-    const nextweek = () => {
-        let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        var today = new Date();
-        var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-        console.log(nextweek);
-        let nextweekDay = nextweek.getDate();
-        let nameDay = days[nextweekDay];
-        // setNWeek(nextweekDay);
-        console.log(nextweekDay);
-    }
+
+    // const nextweek = () => {
+    //     let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    //     var today = new Date();
+    //     var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    //     console.log(nextweek);
+    //     let nextweekDay = nextweek.getDate();
+    //     let nameDay = days[nextweekDay];
+    //     // setNWeek(nextweekDay);
+    //     console.log(nextweekDay);
+    // }
     const anotherWeek = () => {
         setSevenDays(sevenDays + 7);
+        setEnabled(false);
     }
+    const previousWeek = () => {
+        setSevenDays(sevenDays - 7);
 
+    }
 
     return (
         <CalendarWrapper>
             <WeekSelector>
-                <Circle disabled={enabled}><GrFormPrevious /></Circle>
+                <Circle disabled={enabled} onClick={previousWeek}><GrFormPrevious /></Circle>
                 <h3>WEEK COMMENCING {nWeek}</h3>
                 <Circle onClick={anotherWeek}><GrFormNext /></Circle>
             </WeekSelector>
-            <button onClick={nextweek}>next week</button>
-            <h1>{nWeek}</h1>
+
+
         </CalendarWrapper>
     )
 }
