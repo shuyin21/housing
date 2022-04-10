@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
+import CalendarTable from './CalendarTable';
 
 const Calendar = () => {
     const [nWeek, setNWeek] = useState();
@@ -12,21 +13,11 @@ const Calendar = () => {
         const today = new Date();
         const first = today.getDate() + number - today.getDay() + 1;
 
-        console.log(today);
-        console.log(first);
+
         const monday = new Date(today.setDate(first));
         return monday;
     }
-    // const DateFunc = () => {
-    //     var d = new Date();
-    //     var NoTimeDate = d.getDate() + ' ' + (d.getMonth() + 1) + ' ' + d.getFullYear();
-    //     setNWeek(NoTimeDate);
-    //     console.log(d.getDay());
-    //     console.log(NoTimeDate);
-    // }
-    // const thisMonday = (d) => {
-    //     getMondayOfCurrentWeek(d).toLocaleString('en-UK').slice(0, 10);
-    // }
+
     useEffect(() => {
 
         console.log(getMondayOfCurrentWeek(0).toLocaleString('en-UK').slice(0, 10));
@@ -37,16 +28,7 @@ const Calendar = () => {
     }, [sevenDays])
 
 
-    // const nextweek = () => {
-    //     let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    //     var today = new Date();
-    //     var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-    //     console.log(nextweek);
-    //     let nextweekDay = nextweek.getDate();
-    //     let nameDay = days[nextweekDay];
-    //     // setNWeek(nextweekDay);
-    //     console.log(nextweekDay);
-    // }
+
     const anotherWeek = () => {
         setSevenDays(sevenDays + 7);
         setEnabled(false);
@@ -62,8 +44,24 @@ const Calendar = () => {
                 <Circle disabled={enabled} onClick={previousWeek}><GrFormPrevious /></Circle>
                 <h3>WEEK COMMENCING {nWeek}</h3>
                 <Circle onClick={anotherWeek}><GrFormNext /></Circle>
-            </WeekSelector>
 
+            </WeekSelector>
+            <CalendarDiv>
+                <CalendarBody>
+                    <CRow>
+
+                        <th day='Monday'><span>MON</span></th>
+                        <th day='Tuesday'><span>TUE</span></th>
+                        <th day='Wednesday'><span>WED</span></th>
+                        <th day='Thursday'><span>THU</span></th>
+                        <th day='Friday'><span>FRI</span></th>
+                        <th day='Saturday'><span>SAT</span></th>
+                    </CRow>
+                    <CalendarTable time='9AM - 12PM' />
+                    <CalendarTable time='12PM - 3PM' />
+                    <CalendarTable time='3PM - 6PM' />
+                </CalendarBody>
+            </CalendarDiv>
 
         </CalendarWrapper>
     )
@@ -110,3 +108,37 @@ const Circle = styled.button`
     
 
   `
+
+const CalendarDiv = styled.table`
+  width:100%;
+  height:250px;
+  border:1px solid blue;
+  
+  `
+
+const CalendarBody = styled.tbody`
+  width:100%;
+  height:100%;
+  border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+  `;
+
+const CRow = styled.tr`
+display:table-row ;
+vertical-align:inherit;
+border-color:inherit;
+
+
+th{
+    display: table-cell;
+    vertical-align: inherit;
+    letter-spacing: 0.05em;
+    font-size: 11px;
+    font-weight: 100;
+    line-height: 1em;
+    text-align: -internal-center;
+    color: #a0a1a6;
+}
+
+`;
