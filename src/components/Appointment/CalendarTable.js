@@ -18,6 +18,8 @@ const CalendarTable = (props) => {
             <th day={'Thursday'}><span>{props.time}</span></th>
             <th day={'Friday'}><span>{props.time}</span></th>
             <th day={'Saturday'}><span>{props.time}</span></th>
+
+
         </CRow>
     )
 }
