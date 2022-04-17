@@ -17,7 +17,7 @@ const Appointment = () => {
                 <ProgressSteps />
 
             </Container>
-            <button>Valami</button>
+
         </AppointmentWrapper>
     )
 }
