@@ -8,12 +8,19 @@ const Calendar = () => {
     const [sevenDays, setSevenDays] = useState(0);
     const [enabled, setEnabled] = useState(true);
 
+    // getting the Monday of the current week
 
+    const getNow = () => {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1;
+        console.log(day + ' ' + month);
+    }
     function getMondayOfCurrentWeek(number) {
         const today = new Date();
         const first = today.getDate() + number - today.getDay() + 1;
 
-
+        getNow();
         const monday = new Date(today.setDate(first));
         return monday;
     }
@@ -25,6 +32,7 @@ const Calendar = () => {
         if (sevenDays === 0) {
             setEnabled(true);
         }
+
     }, [sevenDays])
 
 
@@ -62,6 +70,7 @@ const Calendar = () => {
                     <CalendarTable time='3PM - 6PM' />
                 </CalendarBody>
             </CalendarDiv>
+
 
         </CalendarWrapper>
     )
