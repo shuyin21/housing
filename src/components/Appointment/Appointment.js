@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FcOvertime } from 'react-icons/fc';
 import ProgressSteps from './Progress';
-import Calendar from './Calendar';
+
 
 const Appointment = () => {
     return (
