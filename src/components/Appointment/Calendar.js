@@ -25,6 +25,8 @@ const Calendar = () => {
         return monday;
     }
 
+
+
     useEffect(() => {
 
         console.log(getMondayOfCurrentWeek(0).toLocaleString('en-UK').slice(0, 10));
