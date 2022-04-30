@@ -146,4 +146,8 @@ min-height:200px;
 margin:50px 5%;
 transition:3s ease-in;
 display:flex;
+
+@media screen and (max-width: 600px){
+    display:none;
+}
 `;
