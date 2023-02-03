@@ -4,15 +4,15 @@ import { BsInfoCircle } from 'react-icons/bs';
 import SelectButton from './SelectButton';
 import Button from '../components/Button';
 import Marketing from './Marketing';
-import { MData1, MData2, MData3, MData4 } from './data';
+import { sellers, buyers, landlords, tenants } from './data';
 
 const Info = () => {
 
-    const [sellers, setSellers] = useState(true);
-    const [buyers, setBuyers] = useState(false);
-    const [landlords, setLandlords] = useState(false);
-    const [tenants, setTenants] = useState(false);
-    const [data, setData] = useState(MData1);
+
+    const [data, setData] = useState(sellers[0].data)
+    const dataSet = [sellers, buyers, landlords, tenants];
+    const [selection, setSelection] = useState('sellers');
+    const buttons = ['sellers', 'buyers', 'landlords', 'tenants'];
     const [MStyle, setMStyle] = useState(
         {
             opacity: 1,
@@ -28,53 +28,16 @@ const Info = () => {
         opacity: 1,
         transition: '0.2s ease-in',
     };
-
-    const sellerHandler = () => {
-        styleHandler();
-        clearStates();
-        setSellers(true);
-        setTimeout(() => {
-            setData(MData1);
-        }, 200);
-
-
-
-
-    }
-    const buyerHandler = () => {
-        styleHandler();
-        clearStates();
-        setBuyers(true);
-        setTimeout(() => {
-            setData(MData2);
-        }, 200);
-
-
-    }
-    const landlordHandler = () => {
-        styleHandler();
-        clearStates();
-        setLandlords(true);
-        setTimeout(() => {
-            setData(MData3);
-        }, 200);
-
-    }
-    const tenantsHandler = () => {
-        styleHandler();
-        clearStates();
-        setTenants(true);
-        setTimeout(() => {
-            setData(MData4);
-        }, 200);
-
-    }
-    const clearStates = () => {
-        setSellers(false);
-        setBuyers(false);
-        setLandlords(false);
-        setTenants(false);
-
+    const stateHandler = (value) => {
+        setSelection(value)
+        dataSet.map(data => {
+            if (data[0].type === value) {
+                styleHandler();
+                setTimeout(() => {
+                    setData(data[0].data)
+                }, 200);
+            }
+        })
     }
     const styleHandler = () => {
         setMStyle(OpacityClear);
@@ -82,29 +45,23 @@ const Info = () => {
             setMStyle(BasicStyle);
         }, 500);
     }
-    useEffect(() => {
-        console.log(data);
-    }, [MStyle]);
-
 
     return (
         <InfoWrapper>
-
             <InfoLogo />
             <h2>WHAT SHU CAN DO FOR YOU</h2>
             <ButtonsWrapper >
-                <SelectButton buttonHandler={sellerHandler} name='Sellers' active={sellers} />
-                <SelectButton buttonHandler={buyerHandler} name='buyers' active={buyers} />
-                <SelectButton buttonHandler={landlordHandler} name='landlords' active={landlords} />
-                <SelectButton buttonHandler={tenantsHandler} name='tenants' active={tenants} />
+                {
+                    buttons.map((btn, idx) => (
+                        <SelectButton key={idx} buttonHandler={() => { stateHandler(btn) }} name={btn} active={selection} />
+                    ))
+                }
             </ButtonsWrapper>
             <DataWrapper style={MStyle}>
-                {data.map((data) => (
-                    <Marketing key={data.key} img={data.img} header={data.header} paragraph={data.paragraph} />
+                {data.map((data, idx) => (
+                    <Marketing key={idx} img={data.img} header={data.header} paragraph={data.paragraph} />
                 ))}
             </DataWrapper>
-
-
             <Button value={'Book appointment'} whereTo={'appointment'} />
 
         </InfoWrapper>

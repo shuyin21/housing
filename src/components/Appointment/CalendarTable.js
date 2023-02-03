@@ -1,13 +1,14 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const CalendarTable = (props) => {
     const [day, setDay] = useState('');
     const dayFunc = (event) => {
+        console.log(event.target.parentNode);
 
         setDay(event.target.value);
-        console.log(props.time, day)
+        // console.log(props.time, day)
     }
 
     return (

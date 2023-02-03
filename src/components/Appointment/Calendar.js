@@ -10,31 +10,38 @@ const Calendar = () => {
 
     // getting the Monday of the current week
 
-    const getNow = () => {
-        const today = new Date();
-        const day = today.getDate();
-        const month = today.getMonth() + 1;
-        console.log(day + ' ' + month);
-    }
-    function getMondayOfCurrentWeek(number) {
-        const today = new Date();
-        const first = today.getDate() + number - today.getDay() + 1;
+    const today = new Date();
+    const first = today.getDate() + sevenDays - today.getDay() + 1;
+    const monday = new Date(today.setDate(first));
+    const [daysOfWeek, setDaysOfWeek] = useState({
+        monday: new Date(today.setDate(first)),
+        Tuesday: new Date(today.setDate(first + 1)),
+        wednesday: new Date(today.setDate(first + 2)),
+        thursday: new Date(today.setDate(first + 3)),
+        friday: new Date(today.setDate(first + 4)),
+    });
 
-        getNow();
-        const monday = new Date(today.setDate(first));
-        return monday;
-    }
+    console.log(daysOfWeek);
 
+    function dateArrayHandler(number) {
+
+
+        // for (let i = 0; i < 7; i++) {
+        //     // console.log(monday);
+        //     let newMonday = new Date(today.setDate(first + i))
+        //     // console.log(newMonday);
+        //     newArray.push(newMonday)
+        // }
+        setDaysOfWeek({ ...daysOfWeek, monday: 'Monday' })
+        console.log(daysOfWeek);
+    }
 
 
     useEffect(() => {
 
-        console.log(getMondayOfCurrentWeek(0).toLocaleString('en-UK').slice(0, 10));
-        setNWeek(getMondayOfCurrentWeek(sevenDays).toLocaleString('en-UK').slice(0, 10));
-        if (sevenDays === 0) {
-            setEnabled(true);
-        }
 
+
+        console.log(sevenDays);
     }, [sevenDays])
 
 
@@ -42,6 +49,14 @@ const Calendar = () => {
     const anotherWeek = () => {
         setSevenDays(sevenDays + 7);
         setEnabled(false);
+        setDaysOfWeek({
+            monday: new Date(today.setDate(first)),
+            Tuesday: new Date(today.setDate(first + 1)),
+            wednesday: new Date(today.setDate(first + 2)),
+            thursday: new Date(today.setDate(first + 3)),
+            friday: new Date(today.setDate(first + 4)),
+        })
+
     }
     const previousWeek = () => {
         setSevenDays(sevenDays - 7);
@@ -50,6 +65,7 @@ const Calendar = () => {
 
     return (
         <CalendarWrapper>
+            <button onClick={dateArrayHandler}>Click</button>
             <WeekSelector>
                 <Circle disabled={enabled} onClick={previousWeek}><GrFormPrevious /></Circle>
                 <h3>WEEK COMMENCING {nWeek}</h3>
